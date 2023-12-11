@@ -5,10 +5,12 @@ import { useEffect } from 'react';
 
 function App() {
 
-  const { tg, user } = useTelegram();
+  const { tg, user, onClose } = useTelegram()
+
+  console.log(useTelegram())
 
   useEffect(() => {
-    tg.ready()
+    tg.ready();
   }, [])
 
   return (
@@ -27,6 +29,7 @@ function App() {
           Learn React
           {user?.username}
         </a>
+        <button onClick={onClose()}>Закрыть</button>
       </header>
     </div>
   );
