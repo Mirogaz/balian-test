@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel react-start server-start",
-    "build": "npm-run-all --parallel react-build server-start",
+    "build": "npm cache clean --force && npm i && npm i ./server && craco build && nodemon ./server/index.js",
     "react-start": "craco start",
     "react-build": "npm i && craco build",
     "server-start": "npm cache clean --force && npm i ./server && nodemon ./server/index.js",
