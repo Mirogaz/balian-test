@@ -18,7 +18,7 @@
     "build": "npm-run-all --parallel react-build server-start",
     "react-start": "craco start",
     "react-build": "npm i && craco build",
-    "server-start": "npm i ./server && nodemon ./server/index.js",
+    "server-start": "npm cache clean --force && npm i ./server && nodemon ./server/index.js",
     "test": "craco test",
     "eject": "craco eject"
   },
