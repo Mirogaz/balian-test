@@ -14,9 +14,10 @@
   },
   "scripts": {
     "start": "npm-run-all --parallel react-start server-start",
+    "build": "npm-run-all --parallel react-build server-start",
     "react-start": "craco start",
+    "react-build": "craco build",
     "server-start": "nodemon ./server/index.js",
-    "build": "craco build",
     "test": "craco test",
     "eject": "craco eject"
   },
