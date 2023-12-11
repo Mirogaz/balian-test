@@ -1,9 +1,7 @@
+require('dotenv').config({path:__dirname+'/.env'})
 const TelegramBot = require('node-telegram-bot-api');
 
-const token = '6659761730:AAFvXoDq7A3t8y55XU6kUWD9WovBzdlS05Q';
-const webAppUrl = 'https://elaborate-capybara-b3fbe9.netlify.app/';
-
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(process.env.TOKEN, { polling: true });
 
 bot.on('message', async (msg) => {
 	const chatId = msg.chat.id;
@@ -14,14 +12,14 @@ bot.on('message', async (msg) => {
 				inline_keyboard: [
 					[
 						{
-                            text: 'Сайт',
-                            web_app: {
-                                url: webAppUrl
-                            }
-                        }
-					]
-				]
-			}
+							text: 'Сайт',
+							web_app: {
+								url: process.env.WEB_APP_URL,
+							},
+						},
+					],
+				],
+			},
 		});
 	}
 });

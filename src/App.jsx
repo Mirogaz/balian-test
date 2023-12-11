@@ -1,7 +1,16 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { useTelegram } from '@hooks/useTelegram';
+import { useEffect } from 'react';
 
 function App() {
+
+  const { tg, user } = useTelegram();
+
+  useEffect(() => {
+    tg.ready()
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,6 +25,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
+          {user?.username}
         </a>
       </header>
     </div>
