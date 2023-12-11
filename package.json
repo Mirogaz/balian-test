@@ -10,6 +10,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "sass": "^1.69.5",
+    "server": "file:server",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -17,7 +18,7 @@
     "build": "npm-run-all --parallel react-build server-start",
     "react-start": "craco start",
     "react-build": "craco build",
-    "server-start": "nodemon ./server/index.js",
+    "server-start": "npm i ./server && nodemon ./server/index.js",
     "test": "craco test",
     "eject": "craco eject"
   },
