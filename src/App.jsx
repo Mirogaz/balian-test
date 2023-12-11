@@ -7,8 +7,6 @@ function App() {
 
   const { tg, user, onClose } = useTelegram()
 
-  console.log(useTelegram())
-
   useEffect(() => {
     tg.ready();
   }, [])
@@ -29,7 +27,7 @@ function App() {
           Learn React
           {user?.username}
         </a>
-        <button onClick={onClose()}>Закрыть</button>
+        <button onClick={onClose}>Закрыть</button>
       </header>
     </div>
   );
