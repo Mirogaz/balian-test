@@ -17,7 +17,7 @@ export default function Header() {
         <FontAwesomeIcon icon={faChevronDown} />
       </div>
       <div className={styles.header__img}>
-        <img src={user?.photo_url} alt="Photo Profile" />
+        <img src={user?.photo_url} alt="Profile" />
       </div>
     </header>
   )
