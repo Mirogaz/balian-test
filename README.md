@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+# Документация для развертывания проекта 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 1. Клонирование проекта
 
-## Available Scripts
+```console
+  git clone https://git.thenewschool.dev/nschoolteam/redesign/newschool-redesign.git
+```
 
-In the project directory, you can run:
+или 
 
-### `npm start`
+```console
+  git clone git@git.thenewschool.dev:nschoolteam/redesign/newschool-redesign.git
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Лучше всего по ssh. Для этого добавьте его в настройках 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. Установка зависимостей 
 
-### `npm test`
+В проекте используется пакетный менеджер yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### 2.1 Установка пакетов
 
-### `npm run build`
+```console
+    yarn install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### 2.2 Запуск проекта
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```console
+    yarn run start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Для build 
 
-### `npm run eject`
+```console
+    yarn run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Проект должен запуститься по адресу 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```console
+    http://localhost:4034
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Весь перечень команд находится в package.json. Пройдемся по основным и самым частым в использовании 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```console
+    yarn run svg
+```
 
-## Learn More
+Команда для добавления svg. Поместите картинку в папку svg-icon и запустите команду. Теперь при использовании ns-icon в атрибуте icon укажите название картинки.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```console
+    yarn run generate-sitemap-all
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Используется для генерации sitemap всего сайта. Будет совершенствоваться со временем. Если скрипт в первый раз выдал ошибку (такое может быть), то перезапустите его.
 
-### Code Splitting
+```console
+    yarn run schema
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Самая полезная команда из всех. С помощью нее можно получить все типы, которые есть в API. Самый простой способ объяснить команду - показать на примере.
 
-### Analyzing the Bundle Size
+К примеру, при запросе
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+``` api
+GET /api/v2/report-position/
+```
 
-### Making a Progressive Web App
+появилось новое поле "entity". Чтобы не добавлять руками в файл с типами, прописываем эту команду, она подхватывает схемы из https://develop.thenewschool.dev/docs/schema/?format=json и автоматически подставляет в нужный объект.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<span style="color:red; font-weight:bold;">ВАЖНО!!!</span> Работайте с командой аккуратнее и после применения проверяйте на ошибки Работайте с командой аккуратнее и после применения проверяйте на ошибки
 
-### Advanced Configuration
+В процессе использования команд может появиться ошибка
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+```console
+node:internal/fs/utils:916
+    throw new ERR_INVALID_ARG_TYPE(
+    ^
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+TypeError [ERR_INVALID_ARG_TYPE]: The "data" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received an instance of Object
+    at Object.writeFileSync (node:fs:2281:5)
+    at /home/dezember/Desktop/newschool/newschool-redesign/generate-svgs.ts:14:5
+    at FSReqCallback.oncomplete (node:fs:189:23) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
 
-### `npm run build` fails to minify
+Node.js v20.8.1
+error Command failed with exit code 1.
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Связано это с неправильной версии Node. Поменяйте версию (например на 16.20.2) с помощью этих команд 
+
+```console
+    nvm list - весь список версий 
+    nvm install 16.20.2
+    nvm use 16.20.2
+```
+
+### 3. Полезные ссылки
+
+* https://www.artlebedev.ru/typograf/ - используется для правильной типографии текста 
+* https://netology-university.bitbucket.io/codestyle/css/ - стилизация css кода и порядок свойств 
+* https://ru.bem.info/methodology/ - методология БЭМ
+* https://develop.thenewschool.dev/docs/swagger/ - API проекта
